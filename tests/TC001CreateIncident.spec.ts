@@ -1,5 +1,6 @@
 import { test, expect, request } from '@playwright/test';
 import { payload } from '../utils/payload/payloads';
+import { path } from '../utils/path/paths';
 import { APIUtils } from '../utils/APIUtils';
 
 let apiContext;
@@ -11,9 +12,8 @@ let sys_id : string;
 test.describe('Create Incident', () => {
 
     test.beforeAll(async ({ baseURL, extraHTTPHeaders }) => {
-        const basePath = '/api/now/table/incident';
         apiContext = await request.newContext({ baseURL, extraHTTPHeaders });
-        apiUtils = new APIUtils(apiContext, basePath);
+        apiUtils = new APIUtils(apiContext, path.incident);
     });
 
     test('Incident Creation Successful', async () => {
