@@ -6,14 +6,12 @@ import { APIUtils } from '../utils/APIUtils';
 let apiContext
 let apiUtils;
 
-let res;
 let sys_id: string;
 let number: string;
 
 test.describe('Get Incident', () => {
 
     test.beforeAll(async ({ baseURL, extraHTTPHeaders }) => {
-        const basePath = '/api/now/table/incident';
         apiContext = await request.newContext({ baseURL, extraHTTPHeaders });
         apiUtils = new APIUtils(apiContext, path.incident);
     })
@@ -23,9 +21,9 @@ test.describe('Get Incident', () => {
         await expect(response.status()).toBe(201);
         await expect(response.ok()).toBeTruthy();
         console.log(await response.json());
-        res = await response.json();
-        sys_id = res.result.sys_id;
-        number = res.result.number;
+        const receivedRes = await response.json();
+        sys_id = receivedRes.result.sys_id;
+        number = receivedRes.result.number;
     })
 
     test('Get Incident Successful', async () => {

@@ -11,7 +11,6 @@ let sys_id: string;
 test.describe('Modify Incident', () => {
 
     test.beforeAll(async ({ baseURL, extraHTTPHeaders }) => {
-        const basePath = '/api/now/table/incident';
         apiContext = await request.newContext({ baseURL, extraHTTPHeaders });
         apiUtils = new APIUtils(apiContext, path.incident);
     })
