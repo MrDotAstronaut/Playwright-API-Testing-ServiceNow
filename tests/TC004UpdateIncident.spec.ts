@@ -1,7 +1,7 @@
-import { test, expect, request } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { payload } from '../utils/payload/payloads';
 import { path } from '../utils/path/paths';
-import { APIUtils } from '../utils/APIUtils';
+import { APIUtils } from '../utils/api/APIUtils';
 
 let apiContext;
 let apiUtils;
@@ -10,10 +10,9 @@ let sys_id: string;
 
 test.describe('Update Incident', () => {
 
-    test.beforeAll(async ({ baseURL, extraHTTPHeaders }) => {
-        apiContext = await request.newContext({ baseURL, extraHTTPHeaders });
-        apiUtils = new APIUtils(apiContext, path.incident);
-    })
+    test.beforeAll(async ({ request }) => {
+        apiUtils = new APIUtils(request, path.incident);
+    });
 
     test.beforeEach(async () => {
         const response = await apiUtils.createIncident(payload.createPayload);
@@ -42,10 +41,6 @@ test.describe('Update Incident', () => {
             await expect(response.status()).toBe(204);
             await expect(response.ok()).toBeTruthy();
         }
-    });
-
-    test.afterAll(async () => {
-        apiContext.dispose();
     });
 
 })

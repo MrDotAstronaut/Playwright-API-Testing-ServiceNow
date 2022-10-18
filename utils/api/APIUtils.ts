@@ -2,23 +2,23 @@ import { APIRequestContext } from '@playwright/test';
 
 export class APIUtils{
 
-    readonly apiContext : APIRequestContext;
-    readonly basePath : string;
+    readonly request : APIRequestContext;
+    readonly path : string;
 
-    constructor(apiContext : APIRequestContext, basePath : string){
-        this.apiContext = apiContext;
-        this.basePath = basePath;
+    constructor(request : APIRequestContext, path : string){
+        this.request = request;
+        this.path = path;
     }
 
     async createIncident(payload : JSON){
-        const response = await this.apiContext.post(`${this.basePath}`, {
+        const response = await this.request.post(`${this.path}`, {
             data: payload
         });
         return response;
     }
 
     async getIncident(number : string){
-        const response = await this.apiContext.get(`${this.basePath}`, {
+        const response = await this.request.get(`${this.path}`, {
             params: {
                 task_effective_number: number,
             }
@@ -27,21 +27,21 @@ export class APIUtils{
     }
 
     async modifyIncident(payload : JSON, sys_id : string){
-        const response = await this.apiContext.put(`${this.basePath}/${sys_id}`, {
+        const response = await this.request.put(`${this.path}/${sys_id}`, {
             data: payload
         });
         return response;
     }
 
     async updateIncident(payload : JSON, sys_id : string){
-        const response = await this.apiContext.patch(`${this.basePath}/${sys_id}`, {
+        const response = await this.request.patch(`${this.path}/${sys_id}`, {
             data: payload
         });
         return response;
     }
 
     async deleteIncident(sys_id : string){
-        const response = await this.apiContext.delete(`${this.basePath}/${sys_id}`, {
+        const response = await this.request.delete(`${this.path}/${sys_id}`, {
             data: { }
         });
         return response;
