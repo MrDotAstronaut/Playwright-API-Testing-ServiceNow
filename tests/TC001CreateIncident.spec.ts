@@ -3,7 +3,6 @@ import { payload } from '../utils/payload/payloads';
 import { path } from '../utils/path/paths';
 import { APIUtils } from '../utils/api/APIUtils';
 
-let apiContext;
 let apiUtils;
 
 let sys_id : string;
